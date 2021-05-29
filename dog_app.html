@@ -14259,40 +14259,23 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Convolutional-Neural-Networks">Convolutional Neural Networks<a class="anchor-link" href="#Convolutional-Neural-Networks">&#182;</a></h1><h2 id="Project:-Write-an-Algorithm-for-a-Dog-Identification-App">Project: Write an Algorithm for a Dog Identification App<a class="anchor-link" href="#Project:-Write-an-Algorithm-for-a-Dog-Identification-App">&#182;</a></h2><hr>
-<p>In this notebook, some template code has already been provided for you, and you will need to implement additional functionality to successfully complete this project. You will not need to modify the included code beyond what is requested. Sections that begin with <strong>'(IMPLEMENTATION)'</strong> in the header indicate that the following block of code will require additional functionality which you must provide. Instructions will be provided for each section, and the specifics of the implementation are marked in the code block with a 'TODO' statement. Please be sure to read the instructions carefully!</p>
-<blockquote><p><strong>Note</strong>: Once you have completed all of the code implementations, you need to finalize your work by exporting the Jupyter Notebook as an HTML document. Before exporting the notebook to html, all of the code cells need to have been run so that reviewers can see the final implementation and output. You can then export the notebook by using the menu above and navigating to <strong>File -&gt; Download as -&gt; HTML (.html)</strong>. Include the finished document along with this notebook as your submission.</p>
-</blockquote>
-<p>In addition to implementing code, there will be questions that you must answer which relate to the project and your implementation. Each section where you will answer a question is preceded by a <strong>'Question X'</strong> header. Carefully read each question and provide thorough answers in the following text boxes that begin with <strong>'Answer:'</strong>. Your project submission will be evaluated based on your answers to each of the questions and the implementation you provide.</p>
-<blockquote><p><strong>Note:</strong> Code and Markdown cells can be executed using the <strong>Shift + Enter</strong> keyboard shortcut.  Markdown cells can be edited by double-clicking the cell to enter edit mode.</p>
-</blockquote>
-<p>The rubric contains <em>optional</em> "Stand Out Suggestions" for enhancing the project beyond the minimum requirements. If you decide to pursue the "Stand Out Suggestions", you should include the code in this Jupyter notebook.</p>
+<h1 id="Convolutional-Neural-Networks">Convolutional Neural Networks<a class="anchor-link" href="#Convolutional-Neural-Networks">&#182;</a></h1><h2 id="Algorithm-for-a-Dog-Identification-App">Algorithm for a Dog Identification App<a class="anchor-link" href="#Algorithm-for-a-Dog-Identification-App">&#182;</a></h2><hr>
 <hr>
-<h3 id="Why-We're-Here">Why We're Here<a class="anchor-link" href="#Why-We're-Here">&#182;</a></h3><p>In this notebook, you will make the first steps towards developing an algorithm that could be used as part of a mobile or web app.  At the end of this project, your code will accept any user-supplied image as input.  If a dog is detected in the image, it will provide an estimate of the dog's breed.  If a human is detected, it will provide an estimate of the dog breed that is most resembling.  The image below displays potential sample output of your finished project (... but we expect that each student's algorithm will behave differently!).</p>
-<p><img src="images/sample_dog_output.png" alt="Sample Dog Output"></p>
-<p>In this real-world setting, you will need to piece together a series of models to perform different tasks; for instance, the algorithm that detects humans in an image will be different from the CNN that infers dog breed.  There are many points of possible failure, and no perfect algorithm exists.  Your imperfect solution will nonetheless create a fun user experience!</p>
-<h3 id="The-Road-Ahead">The Road Ahead<a class="anchor-link" href="#The-Road-Ahead">&#182;</a></h3><p>We break the notebook into separate steps.  Feel free to use the links below to navigate the notebook.</p>
+<h3 id="Why-We're-Here">Why We're Here<a class="anchor-link" href="#Why-We're-Here">&#182;</a></h3><p>In this notebook, we will develop an algorithm that could be used as part of a mobile or web app.  At the end of this project, our code will accept any user-supplied image as input.  If a dog is detected in the image, it will provide an estimate of the dog's breed.  If a human is detected, it will provide an estimate of the dog breed that is most resembling.<br>
+In this real-world setting, we will need to piece together a series of models to perform different tasks; for instance, the algorithm that detects humans in an image will be different from the CNN that infers dog breed.  There are many points of possible failure, and no perfect algorithm exists.  Our imperfect solution will nonetheless create a fun user experience!</p>
+<p>We break the notebook into separate steps.  Feel free to use the links below to navigate the notebook.</p>
 <ul>
 <li><a href="#step0">Step 0</a>: Import Datasets</li>
 <li><a href="#step1">Step 1</a>: Detect Humans</li>
 <li><a href="#step2">Step 2</a>: Detect Dogs</li>
-<li><a href="#step3">Step 3</a>: Create a CNN to Classify Dog Breeds (from Scratch)</li>
-<li><a href="#step4">Step 4</a>: Create a CNN to Classify Dog Breeds (using Transfer Learning)</li>
-<li><a href="#step5">Step 5</a>: Write your Algorithm</li>
-<li><a href="#step6">Step 6</a>: Test Your Algorithm</li>
+<li><a href="#step3">Step 3</a>: CNN to Classify Dog Breeds (from Scratch)</li>
+<li><a href="#step4">Step 4</a>: CNN to Classify Dog Breeds (using Transfer Learning)</li>
+<li><a href="#step5">Step 5</a>: Our Algorithm</li>
+<li><a href="#step6">Step 6</a>: Test Our Algorithm</li>
 </ul>
 <hr>
 <p><a id='step0'></a></p>
-<h2 id="Step-0:-Import-Datasets">Step 0: Import Datasets<a class="anchor-link" href="#Step-0:-Import-Datasets">&#182;</a></h2><p>Make sure that you've downloaded the required human and dog datasets:</p>
-<ul>
-<li><p>Download the <a href="https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip">dog dataset</a>.  Unzip the folder and place it in this project's home directory, at the location <code>/dogImages</code>.</p>
-</li>
-<li><p>Download the <a href="https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip">human dataset</a>.  Unzip the folder and place it in the home directory, at location <code>/lfw</code>.</p>
-</li>
-</ul>
-<p><em>Note: If you are using a Windows machine, you are encouraged to use <a href="http://www.7-zip.org/">7zip</a> to extract the folder.</em></p>
-<p>In the code cell below, we save the file paths for both the human (LFW) dataset and dog dataset in the numpy arrays <code>human_files</code> and <code>dog_files</code>.</p>
-
+<h2 id="Step-0:-Import-Datasets">Step 0: Import Datasets<a class="anchor-link" href="#Step-0:-Import-Datasets">&#182;</a></h2>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -14472,19 +14455,7 @@ There are 8351 total dog images.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Assess-the-Human-Face-Detector">(IMPLEMENTATION) Assess the Human Face Detector<a class="anchor-link" href="#(IMPLEMENTATION)-Assess-the-Human-Face-Detector">&#182;</a></h3><p><strong>Question 1:</strong> Use the code cell below to test the performance of the <code>face_detector</code> function.</p>
-<ul>
-<li>What percentage of the first 100 images in <code>human_files</code> have a detected human face?  </li>
-<li>What percentage of the first 100 images in <code>dog_files</code> have a detected human face? </li>
-</ul>
-<p>Ideally, we would like 100% of human images with a detected face and 0% of dog images with a detected face.  You will see that our algorithm falls short of this goal, but still gives acceptable performance.  We extract the file paths for the first 100 images from each of the datasets and store them in the numpy arrays <code>human_files_short</code> and <code>dog_files_short</code>.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Answer:</strong> 
-(You can print out your results and/or write your percentages in this cell)</p>
+<p>What we infer from out results:</p>
 <ul>
 <li>I was able to get 96% of human faces detected</li>
 <li>The human face detector detected 18% of the dog faces as Human faces.</li>
@@ -14503,7 +14474,7 @@ There are 8351 total dog images.
 <span class="n">dog_files_short</span> <span class="o">=</span> <span class="n">dog_files</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
 <span class="c1">#-#-# Do NOT modify the code above this line. #-#-#</span>
 
-<span class="c1">## TODO: Test the performance of the face_detector algorithm </span>
+<span class="c1">## Test the performance of the face_detector algorithm </span>
 <span class="c1">## on the images in human_files_short and dog_files_short.</span>
 <span class="n">counth</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">countd</span> <span class="o">=</span> <span class="mi">0</span>
@@ -14563,28 +14534,6 @@ Human faces identified from Dog Images: 18%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We suggest the face detector from OpenCV as a potential way to detect human images in your algorithm, but you are free to explore other approaches, especially approaches that make use of deep learning :).  Please use the code cell below to design and test your own face detection algorithm.  If you decide to pursue this <em>optional</em> task, report performance on <code>human_files_short</code> and <code>dog_files_short</code>.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### (Optional) </span>
-<span class="c1">### TODO: Test performance of another face detection algorithm.</span>
-<span class="c1">### Feel free to use as many code cells as needed.</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
 <p><a id='step2'></a></p>
 <h2 id="Step-2:-Detect-Dogs">Step 2: Detect Dogs<a class="anchor-link" href="#Step-2:-Detect-Dogs">&#182;</a></h2><p>In this section, we use a <a href="http://pytorch.org/docs/master/torchvision/models.html">pre-trained model</a> to detect dogs in images.</p>
@@ -14625,8 +14574,7 @@ Human faces identified from Dog Images: 18%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Making-Predictions-with-a-Pre-trained-Model">(IMPLEMENTATION) Making Predictions with a Pre-trained Model<a class="anchor-link" href="#(IMPLEMENTATION)-Making-Predictions-with-a-Pre-trained-Model">&#182;</a></h3><p>In the next code cell, you will write a function that accepts a path to an image (such as <code>'dogImages/train/001.Affenpinscher/Affenpinscher_00001.jpg'</code>) as input and returns the index corresponding to the ImageNet class that is predicted by the pre-trained VGG-16 model.  The output should always be an integer between 0 and 999, inclusive.</p>
-<p>Before writing the function, make sure that you take the time to learn  how to appropriately pre-process tensors for pre-trained models in the <a href="http://pytorch.org/docs/stable/torchvision/models.html">PyTorch documentation</a>.</p>
+<h3 id="Making-Predictions-with-a-Pre-trained-Model">Making Predictions with a Pre-trained Model<a class="anchor-link" href="#Making-Predictions-with-a-Pre-trained-Model">&#182;</a></h3><p>In the next code cell, we will write a function that accepts a path to an image (such as <code>'dogImages/train/001.Affenpinscher/Affenpinscher_00001.jpg'</code>) as input and returns the index corresponding to the ImageNet class that is predicted by the pre-trained VGG-16 model.  The output should always be an integer between 0 and 999, inclusive.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14654,7 +14602,6 @@ Human faces identified from Dog Images: 18%
 <span class="sd">        Index corresponding to VGG-16 model&#39;s prediction</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
-    <span class="c1">## TODO: Complete the function.</span>
     <span class="c1">## Load and pre-process an image from the given img_path</span>
     <span class="c1">## Return the *index* of the predicted class for that image</span>
     <span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">CenterCrop</span><span class="p">(</span><span class="mi">224</span><span class="p">),</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
@@ -14665,7 +14612,6 @@ Human faces identified from Dog Images: 18%
     <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
     <span class="n">VGG16</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">VGG16</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<span class="c1">#    _, index = torch.max(probs, 1)</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">pred</span> <span class="c1"># predicted class index</span>
 </pre></div>
@@ -14678,8 +14624,8 @@ Human faces identified from Dog Images: 18%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Write-a-Dog-Detector">(IMPLEMENTATION) Write a Dog Detector<a class="anchor-link" href="#(IMPLEMENTATION)-Write-a-Dog-Detector">&#182;</a></h3><p>While looking at the <a href="https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a">dictionary</a>, you will notice that the categories corresponding to dogs appear in an uninterrupted sequence and correspond to dictionary keys 151-268, inclusive, to include all categories from <code>'Chihuahua'</code> to <code>'Mexican hairless'</code>.  Thus, in order to check to see if an image is predicted to contain a dog by the pre-trained VGG-16 model, we need only check if the pre-trained model predicts an index between 151 and 268 (inclusive).</p>
-<p>Use these ideas to complete the <code>dog_detector</code> function below, which returns <code>True</code> if a dog is detected in an image (and <code>False</code> if not).</p>
+<h3 id="Dog-Detector">Dog Detector<a class="anchor-link" href="#Dog-Detector">&#182;</a></h3><p>While looking at the <a href="https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a">dictionary</a>, we can notice that the categories corresponding to dogs appear in an uninterrupted sequence and correspond to dictionary keys 151-268, inclusive, to include all categories from <code>'Chihuahua'</code> to <code>'Mexican hairless'</code>.  Thus, in order to check to see if an image is predicted to contain a dog by the pre-trained VGG-16 model, we need only check if the pre-trained model predicts an index between 151 and 268 (inclusive).</p>
+<p>Using these ideas we completed the <code>dog_detector</code> function below, which returns <code>True</code> if a dog is detected in an image (and <code>False</code> if not).</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14690,7 +14636,6 @@ Human faces identified from Dog Images: 18%
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### returns &quot;True&quot; if a dog is detected in the image stored at img_path</span>
 <span class="k">def</span> <span class="nf">dog_detector</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
-    <span class="c1">## TODO: Complete the function.</span>
     <span class="n">ret_val</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">prediction</span> <span class="o">=</span> <span class="n">VGG16_predict</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">151</span><span class="p">,</span><span class="mi">269</span><span class="p">)):</span>
@@ -14706,22 +14651,7 @@ Human faces identified from Dog Images: 18%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Assess-the-Dog-Detector">(IMPLEMENTATION) Assess the Dog Detector<a class="anchor-link" href="#(IMPLEMENTATION)-Assess-the-Dog-Detector">&#182;</a></h3><p><strong>Question 2:</strong> Use the code cell below to test the performance of your <code>dog_detector</code> function.</p>
-<ul>
-<li>What percentage of the images in <code>human_files_short</code> have a detected dog?  </li>
-<li>What percentage of the images in <code>dog_files_short</code> have a detected dog?</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Answer:</strong></p>
-<ul>
-<li>Dog faces identified from human Images: 0%</li>
-<li>Dog faces identified from Dog Images: 91%</li>
-</ul>
-
+<h3 id="Assessment-of-the-Dog-Detector">Assessment of the Dog Detector<a class="anchor-link" href="#Assessment-of-the-Dog-Detector">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14729,7 +14659,7 @@ Human faces identified from Dog Images: 18%
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Test the performance of the dog_detector function</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Test the performance of the dog_detector function</span>
 <span class="c1">### on the images in human_files_short and dog_files_short.</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
@@ -14751,7 +14681,7 @@ Human faces identified from Dog Images: 18%
 
 <span class="c1"># Percentage Calculations</span>
 
-<span class="c1"># Calculate the percentage of each types of images classified here</span>
+<span class="c1"># Percentage of each types of images classified here</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dog faces identified from human Images: </span><span class="si">{</span><span class="n">counth</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dog faces identified from Dog Images: </span><span class="si">{</span><span class="n">countd</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </pre></div>
@@ -14786,78 +14716,15 @@ Dog faces identified from Dog Images: 91%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We suggest VGG-16 as a potential network to detect dog images in your algorithm, but you are free to explore other pre-trained networks (such as <a href="http://pytorch.org/docs/master/torchvision/models.html#inception-v3">Inception-v3</a>, <a href="http://pytorch.org/docs/master/torchvision/models.html#id3">ResNet-50</a>, etc).  Please use the code cell below to test other pre-trained PyTorch models.  If you decide to pursue this <em>optional</em> task, report performance on <code>human_files_short</code> and <code>dog_files_short</code>.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### (Optional) </span>
-<span class="c1">### TODO: Report the performance of another pre-trained network.</span>
-<span class="c1">### Feel free to use as many code cells as needed.</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
 <p><a id='step3'></a></p>
 <h2 id="Step-3:-Create-a-CNN-to-Classify-Dog-Breeds-(from-Scratch)">Step 3: Create a CNN to Classify Dog Breeds (from Scratch)<a class="anchor-link" href="#Step-3:-Create-a-CNN-to-Classify-Dog-Breeds-(from-Scratch)">&#182;</a></h2><p>Now that we have functions for detecting humans and dogs in images, we need a way to predict breed from images.  In this step, you will create a CNN that classifies dog breeds.  You must create your CNN <em>from scratch</em> (so, you can't use transfer learning <em>yet</em>!), and you must attain a test accuracy of at least 10%.  In Step 4 of this notebook, you will have the opportunity to use transfer learning to create a CNN that attains greatly improved accuracy.</p>
 <p>We mention that the task of assigning breed to dogs from images is considered exceptionally challenging.  To see why, consider that <em>even a human</em> would have trouble distinguishing between a Brittany and a Welsh Springer Spaniel.</p>
-<table>
-<thead><tr>
-<th>Brittany</th>
-<th>Welsh Springer Spaniel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="images/Brittany_02625.jpg" width="100"></td>
-<td><img src="images/Welsh_springer_spaniel_08203.jpg" width="200"></td>
-</tr>
-</tbody>
-</table>
 <p>It is not difficult to find other dog breed pairs with minimal inter-class variation (for instance, Curly-Coated Retrievers and American Water Spaniels).</p>
-<table>
-<thead><tr>
-<th>Curly-Coated Retriever</th>
-<th>American Water Spaniel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="images/Curly-coated_retriever_03896.jpg" width="200"></td>
-<td><img src="images/American_water_spaniel_00648.jpg" width="200"></td>
-</tr>
-</tbody>
-</table>
-<p>Likewise, recall that labradors come in yellow, chocolate, and black.  Your vision-based algorithm will have to conquer this high intra-class variation to determine how to classify all of these different shades as the same breed.</p>
-<table>
-<thead><tr>
-<th>Yellow Labrador</th>
-<th>Chocolate Labrador</th>
-<th>Black Labrador</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="images/Labrador_retriever_06457.jpg" width="150"></td>
-<td><img src="images/Labrador_retriever_06455.jpg" width="240"></td>
-<td><img src="images/Labrador_retriever_06449.jpg" width="220"></td>
-</tr>
-</tbody>
-</table>
-<p>We also mention that random chance presents an exceptionally low bar: setting aside the fact that the classes are slightly imabalanced, a random guess will provide a correct answer roughly 1 in 133 times, which corresponds to an accuracy of less than 1%.</p>
-<p>Remember that the practice is far ahead of the theory in deep learning.  Experiment with many different architectures, and trust your intuition.  And, of course, have fun!</p>
-<h3 id="(IMPLEMENTATION)-Specify-Data-Loaders-for-the-Dog-Dataset">(IMPLEMENTATION) Specify Data Loaders for the Dog Dataset<a class="anchor-link" href="#(IMPLEMENTATION)-Specify-Data-Loaders-for-the-Dog-Dataset">&#182;</a></h3><p>Use the code cell below to write three separate <a href="http://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">data loaders</a> for the training, validation, and test datasets of dog images (located at <code>dogImages/train</code>, <code>dogImages/valid</code>, and <code>dogImages/test</code>, respectively).  You may find <a href="http://pytorch.org/docs/stable/torchvision/datasets.html">this documentation on custom datasets</a> to be a useful resource.  If you are interested in augmenting your training and/or validation data, check out the wide variety of <a href="http://pytorch.org/docs/stable/torchvision/transforms.html?highlight=transform">transforms</a>!</p>
+<p>Likewise, recalling that labradors come in yellow, chocolate, and black.  Our vision-based algorithm will have to conquer this high intra-class variation to determine how to classify all of these different shades as the same breed.</p>
+<p>We also mention that random chance presents an exceptionally low bar: setting aside the fact that the classes are slightly imabalanced, a random guess will provide a correct answer roughly 1 in 133 times, which corresponds to an accuracy of less than 1%.<br>
+Experiment with many different architectures, and trust your intuition.</p>
+<h3 id="Data-Loaders-for-the-Dog-Dataset">Data Loaders for the Dog Dataset<a class="anchor-link" href="#Data-Loaders-for-the-Dog-Dataset">&#182;</a></h3><p>Three separate <a href="http://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">data loaders</a> for the training, validation, and test datasets of dog images (located at <code>dogImages/train</code>, <code>dogImages/valid</code>, and <code>dogImages/test</code>, respectively).</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14870,8 +14737,8 @@ Dog faces identified from Dog Images: 91%
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
 
-<span class="c1">### TODO: Write data loaders for training, validation, and test sets</span>
-<span class="c1">## Specify appropriate transforms, and batch_sizes</span>
+<span class="c1">### Data loaders for training, validation, and test sets</span>
+<span class="c1">## Including transforms and batch_sizes</span>
 <span class="kn">from</span> <span class="nn">torchvision.transforms</span> <span class="kn">import</span> <span class="n">transforms</span>
 
 <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
@@ -14922,17 +14789,6 @@ Dog faces identified from Dog Images: 91%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Question 3:</strong> Describe your chosen procedure for preprocessing the data.</p>
-<ul>
-<li>How does your code resize the images (by cropping, stretching, etc)?  What size did you pick for the input tensor, and why?</li>
-<li>Did you decide to augment the dataset?  If so, how (through translations, flips, rotations, etc)?  If not, why not?</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Answer</strong>:</p>
 <ul>
 <li>My code resizes the image with the help of Resize function provided by torchvision.transforms. And then crops a portion of the image to the given size(h=224,w=224), so all the images are of identical sizes.</li>
 <li>Yes I did decide to augment the data by the help of Randomly adjusting contrast and adding color jitter in the image as well as used vertical flip and also horizontal flip as that kind of augmentation makes sense in this scenario. The model should be able to identify the dog breed even if a upside down picture is provided by the user, or a unusual lighting conditioned image of a dog. </li>
@@ -14943,7 +14799,7 @@ Dog faces identified from Dog Images: 91%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Model-Architecture">(IMPLEMENTATION) Model Architecture<a class="anchor-link" href="#(IMPLEMENTATION)-Model-Architecture">&#182;</a></h3><p>Create a CNN to classify dog breed.  Use the template in the code cell below.</p>
+<h3 id="Model-Architecture">Model Architecture<a class="anchor-link" href="#Model-Architecture">&#182;</a></h3><p>CNN to classify dog breed.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14957,7 +14813,7 @@ Dog faces identified from Dog Images: 91%
 
 <span class="c1"># define the CNN architecture</span>
 <span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="c1">### TODO: choose an architecture, and complete the class</span>
+    <span class="c1">### Our architecture</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Net</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="c1">## Define layers of a CNN</span>
@@ -14994,8 +14850,6 @@ Dog faces identified from Dog Images: 91%
         <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">x</span>
 
-<span class="c1">#-#-# You do NOT have to modify the code below this line. #-#-#</span>
-
 <span class="c1"># instantiate the CNN</span>
 <span class="n">model_scratch</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
 
@@ -15012,13 +14866,7 @@ Dog faces identified from Dog Images: 91%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Question 4:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Answer:</strong></p>
+<p><strong>What we infer from the above CNN we created:</strong></p>
 <ul>
 <li>The convolution layer I used in the network are of filter size:(3x3), stride: (1x1), padding: (1x1). The tensors resulting from these convolutional layers are of same sizes as they have been since the input. The depth are increased to denote the number of features that are handled by the network. With deeper layer the features identified are usually higher level features.</li>
 <li><p>The output of convolution layer is given as input to Relu activation. This adds non-linearity and helps in speeding up training.</p>
@@ -15032,7 +14880,7 @@ Dog faces identified from Dog Images: 91%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Specify-Loss-Function-and-Optimizer">(IMPLEMENTATION) Specify Loss Function and Optimizer<a class="anchor-link" href="#(IMPLEMENTATION)-Specify-Loss-Function-and-Optimizer">&#182;</a></h3><p>Use the next code cell to specify a <a href="http://pytorch.org/docs/stable/nn.html#loss-functions">loss function</a> and <a href="http://pytorch.org/docs/stable/optim.html">optimizer</a>.  Save the chosen loss function as <code>criterion_scratch</code>, and the optimizer as <code>optimizer_scratch</code> below.</p>
+<h3 id="Loss-Function-and-Optimizer">Loss Function and Optimizer<a class="anchor-link" href="#Loss-Function-and-Optimizer">&#182;</a></h3><p>Use the next code cell to specify a <a href="http://pytorch.org/docs/stable/nn.html#loss-functions">loss function</a> and <a href="http://pytorch.org/docs/stable/optim.html">optimizer</a>.  Save the chosen loss function as <code>criterion_scratch</code>, and the optimizer as <code>optimizer_scratch</code> below.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15043,10 +14891,10 @@ Dog faces identified from Dog Images: 91%
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
 
-<span class="c1">### TODO: select loss function</span>
+<span class="c1">### loss function</span>
 <span class="n">criterion_scratch</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
 
-<span class="c1">### TODO: select optimizer</span>
+<span class="c1">### optimizer</span>
 <span class="n">optimizer_scratch</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model_scratch</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 </pre></div>
 
@@ -15058,7 +14906,7 @@ Dog faces identified from Dog Images: 91%
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Train-and-Validate-the-Model">(IMPLEMENTATION) Train and Validate the Model<a class="anchor-link" href="#(IMPLEMENTATION)-Train-and-Validate-the-Model">&#182;</a></h3><p>Train and validate your model in the code cell below.  <a href="http://pytorch.org/docs/master/notes/serialization.html">Save the final model parameters</a> at filepath <code>'model_scratch.pt'</code>.</p>
+<h3 id="Train-and-Validate-the-Model">Train and Validate the Model<a class="anchor-link" href="#Train-and-Validate-the-Model">&#182;</a></h3><p>Training and validating our model in the code cell below.  <a href="http://pytorch.org/docs/master/notes/serialization.html">Saving the final model parameters</a> at filepath <code>'model_scratch.pt'</code>.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15133,7 +14981,7 @@ Dog faces identified from Dog Images: 91%
             <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_scratch</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">save_path</span><span class="p">)</span>
             <span class="n">valid_loss_min</span> <span class="o">=</span> <span class="n">valid_loss</span>  
         
-        <span class="c1">## TODO: save the model if validation loss has decreased</span>
+        <span class="c1">## save the model if validation loss has decreased</span>
             
     <span class="c1"># return trained model</span>
     <span class="k">return</span> <span class="n">model</span>
@@ -15277,7 +15125,7 @@ Epoch: 50 	Training Loss: 3.308694 	Validation Loss: 3.050292
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Test-the-Model">(IMPLEMENTATION) Test the Model<a class="anchor-link" href="#(IMPLEMENTATION)-Test-the-Model">&#182;</a></h3><p>Try out your model on the test dataset of dog images.  Use the code cell below to calculate and print the test loss and accuracy.  Ensure that your test accuracy is greater than 10%.</p>
+<h3 id="Test-the-Model">Test the Model<a class="anchor-link" href="#Test-the-Model">&#182;</a></h3><p>Ensuring that our test accuracy is greater than 10%.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15390,10 +15238,8 @@ Test Accuracy: 17% (144/836)
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
 <p><a id='step4'></a></p>
-<h2 id="Step-4:-Create-a-CNN-to-Classify-Dog-Breeds-(using-Transfer-Learning)">Step 4: Create a CNN to Classify Dog Breeds (using Transfer Learning)<a class="anchor-link" href="#Step-4:-Create-a-CNN-to-Classify-Dog-Breeds-(using-Transfer-Learning)">&#182;</a></h2><p>You will now use transfer learning to create a CNN that can identify dog breed from images.  Your CNN must attain at least 60% accuracy on the test set.</p>
-<h3 id="(IMPLEMENTATION)-Specify-Data-Loaders-for-the-Dog-Dataset">(IMPLEMENTATION) Specify Data Loaders for the Dog Dataset<a class="anchor-link" href="#(IMPLEMENTATION)-Specify-Data-Loaders-for-the-Dog-Dataset">&#182;</a></h3><p>Use the code cell below to write three separate <a href="http://pytorch.org/docs/master/data.html#torch.utils.data.DataLoader">data loaders</a> for the training, validation, and test datasets of dog images (located at <code>dogImages/train</code>, <code>dogImages/valid</code>, and <code>dogImages/test</code>, respectively).</p>
-<p>If you like, <strong>you are welcome to use the same data loaders from the previous step</strong>, when you created a CNN from scratch.</p>
-
+<h2 id="Step-4:-CNN-to-Classify-Dog-Breeds-(using-Transfer-Learning)">Step 4: CNN to Classify Dog Breeds (using Transfer Learning)<a class="anchor-link" href="#Step-4:-CNN-to-Classify-Dog-Breeds-(using-Transfer-Learning)">&#182;</a></h2><p>We will now use transfer learning to create a CNN that can identify dog breed from images.  Our CNN must attain at least 60% accuracy on the test set.</p>
+<h3 id="Data-Loaders-for-the-Dog-Dataset">Data Loaders for the Dog Dataset<a class="anchor-link" href="#Data-Loaders-for-the-Dog-Dataset">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -15401,7 +15247,7 @@ Test Accuracy: 17% (144/836)
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## TODO: Specify data loaders</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## data loaders</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span>
@@ -15455,7 +15301,7 @@ Test Accuracy: 17% (144/836)
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Model-Architecture">(IMPLEMENTATION) Model Architecture<a class="anchor-link" href="#(IMPLEMENTATION)-Model-Architecture">&#182;</a></h3><p>Use transfer learning to create a CNN to classify dog breed.  Use the code cell below, and save your initialized model as the variable <code>model_transfer</code>.</p>
+<h3 id="Model-Architecture">Model Architecture<a class="anchor-link" href="#Model-Architecture">&#182;</a></h3><p>We save your initialized model as the variable <code>model_transfer</code>.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15468,7 +15314,7 @@ Test Accuracy: 17% (144/836)
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
-<span class="c1">## TODO: Specify model architecture </span>
+<span class="c1">## model architecture </span>
 <span class="n">model_transfer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
@@ -15501,13 +15347,7 @@ Test Accuracy: 17% (144/836)
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Answer:</strong></p>
+<p><strong>What we infer from the CNN we created using Transfer Learning:</strong></p>
 <ul>
 <li>First I used up a few code cells up to check the ResNet50 models architecture and found out that the end classification is done with one single layer so I Decided to add two Linear layers for training my images on them. </li>
 <li>I applied RelU Activation after each Linear layer and at the end added a LogSoftmax to keep my values for each class between 0 to 1 as a probability factor to unerstand how much chance did that node had to be the output result. </li>
@@ -15521,8 +15361,7 @@ Test Accuracy: 17% (144/836)
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Specify-Loss-Function-and-Optimizer">(IMPLEMENTATION) Specify Loss Function and Optimizer<a class="anchor-link" href="#(IMPLEMENTATION)-Specify-Loss-Function-and-Optimizer">&#182;</a></h3><p>Use the next code cell to specify a <a href="http://pytorch.org/docs/master/nn.html#loss-functions">loss function</a> and <a href="http://pytorch.org/docs/master/optim.html">optimizer</a>.  Save the chosen loss function as <code>criterion_transfer</code>, and the optimizer as <code>optimizer_transfer</code> below.</p>
-
+<h3 id="Loss-Function-and-Optimizer">Loss Function and Optimizer<a class="anchor-link" href="#Loss-Function-and-Optimizer">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -15543,7 +15382,7 @@ Test Accuracy: 17% (144/836)
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Train-and-Validate-the-Model">(IMPLEMENTATION) Train and Validate the Model<a class="anchor-link" href="#(IMPLEMENTATION)-Train-and-Validate-the-Model">&#182;</a></h3><p>Train and validate your model in the code cell below.  <a href="http://pytorch.org/docs/master/notes/serialization.html">Save the final model parameters</a> at filepath <code>'model_transfer.pt'</code>.</p>
+<h3 id="Train-and-Validate-the-Model">Train and Validate the Model<a class="anchor-link" href="#Train-and-Validate-the-Model">&#182;</a></h3><p>Training and validating our model in the code cell below.  <a href="http://pytorch.org/docs/master/notes/serialization.html">Saving the final model parameters</a> at filepath <code>'model_transfer.pt'</code>.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15614,12 +15453,14 @@ Test Accuracy: 17% (144/836)
             <span class="n">train_loss</span><span class="p">,</span>
             <span class="n">valid_loss</span>
             <span class="p">))</span>
+        
+        <span class="c1">## save the model if validation loss has decreased</span>
         <span class="k">if</span> <span class="n">valid_loss</span> <span class="o">&lt;=</span> <span class="n">valid_loss_min</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation loss decreased (</span><span class="si">{:.6f}</span><span class="s1"> --&gt; </span><span class="si">{:.6f}</span><span class="s1">).  Saving model ...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">valid_loss_min</span><span class="p">,</span><span class="n">valid_loss</span><span class="p">))</span>
             <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">&#39;model_transfer.pt&#39;</span><span class="p">)</span>
             <span class="n">valid_loss_min</span> <span class="o">=</span> <span class="n">valid_loss</span>  
         
-        <span class="c1">## TODO: save the model if validation loss has decreased</span>
+        
             
     <span class="c1"># return trained model</span>
     <span class="k">return</span> <span class="n">model</span>
@@ -15707,7 +15548,7 @@ Epoch: 20 	Training Loss: 1.033390 	Validation Loss: 0.896099
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Test-the-Model">(IMPLEMENTATION) Test the Model<a class="anchor-link" href="#(IMPLEMENTATION)-Test-the-Model">&#182;</a></h3><p>Try out your model on the test dataset of dog images. Use the code cell below to calculate and print the test loss and accuracy.  Ensure that your test accuracy is greater than 60%.</p>
+<h3 id="Test-the-Model">Test the Model<a class="anchor-link" href="#Test-the-Model">&#182;</a></h3><p>We ensure that our test accuracy is greater than 60%.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15780,7 +15621,7 @@ Test Accuracy: 82% (687/836)
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="(IMPLEMENTATION)-Predict-Dog-Breed-with-the-Model">(IMPLEMENTATION) Predict Dog Breed with the Model<a class="anchor-link" href="#(IMPLEMENTATION)-Predict-Dog-Breed-with-the-Model">&#182;</a></h3><p>Write a function that takes an image path as input and returns the dog breed (<code>Affenpinscher</code>, <code>Afghan hound</code>, etc) that is predicted by your model.</p>
+<h3 id="Predict-Dog-Breed-with-the-Model">Predict Dog Breed with the Model<a class="anchor-link" href="#Predict-Dog-Breed-with-the-Model">&#182;</a></h3><p>We write a function that takes an image path as input and returns the dog breed (<code>Affenpinscher</code>, <code>Afghan hound</code>, etc) that is predicted by our model.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -15789,7 +15630,7 @@ Test Accuracy: 82% (687/836)
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write a function that takes a path to an image as input</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Function that takes a path to an image as input</span>
 <span class="c1">### and returns the dog breed that is predicted by the model.</span>
 
 <span class="c1"># list of class names by index, i.e. a name can be accessed like class_names[0]</span>
@@ -15844,16 +15685,13 @@ Test Accuracy: 82% (687/836)
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
 <p><a id='step5'></a></p>
-<h2 id="Step-5:-Write-your-Algorithm">Step 5: Write your Algorithm<a class="anchor-link" href="#Step-5:-Write-your-Algorithm">&#182;</a></h2><p>Write an algorithm that accepts a file path to an image and first determines whether the image contains a human, dog, or neither.  Then,</p>
+<h2 id="Step-5:-Write-our-Algorithm">Step 5: Write our Algorithm<a class="anchor-link" href="#Step-5:-Write-our-Algorithm">&#182;</a></h2><p>We write an algorithm that accepts a file path to an image and first determines whether the image contains a human, dog, or neither.  Then,</p>
 <ul>
 <li>if a <strong>dog</strong> is detected in the image, return the predicted breed.</li>
 <li>if a <strong>human</strong> is detected in the image, return the resembling dog breed.</li>
 <li>if <strong>neither</strong> is detected in the image, provide output that indicates an error.</li>
 </ul>
-<p>You are welcome to write your own functions for detecting humans and dogs in images, but feel free to use the <code>face_detector</code> and <code>dog_detector</code> functions developed above.  You are <strong>required</strong> to use your CNN from Step 4 to predict dog breed.</p>
-<p>Some sample output for our algorithm is provided below, but feel free to design your own user experience!</p>
-<p><img src="images/sample_human_output.png" alt="Sample Human Output"></p>
-<h3 id="(IMPLEMENTATION)-Write-your-Algorithm">(IMPLEMENTATION) Write your Algorithm<a class="anchor-link" href="#(IMPLEMENTATION)-Write-your-Algorithm">&#182;</a></h3>
+<h3 id="Our-Algorithm">Our Algorithm<a class="anchor-link" href="#Our-Algorithm">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -15861,8 +15699,7 @@ Test Accuracy: 82% (687/836)
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[77]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write your algorithm.</span>
-<span class="c1">### Feel free to use as many code cells as needed.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Oour algorithm.</span>
 
 <span class="k">def</span> <span class="nf">run_app</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="c1">## handle cases for a human face, dog, and neither</span>
@@ -15886,15 +15723,11 @@ Test Accuracy: 82% (687/836)
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
 <p><a id='step6'></a></p>
-<h2 id="Step-6:-Test-Your-Algorithm">Step 6: Test Your Algorithm<a class="anchor-link" href="#Step-6:-Test-Your-Algorithm">&#182;</a></h2><p>In this section, you will take your new algorithm for a spin!  What kind of dog does the algorithm think that <em>you</em> look like?  If you have a dog, does it predict your dog's breed accurately?  If you have a cat, does it mistakenly think that your cat is a dog?</p>
-<h3 id="(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">(IMPLEMENTATION) Test Your Algorithm on Sample Images!<a class="anchor-link" href="#(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">&#182;</a></h3><p>Test your algorithm at least six images on your computer.  Feel free to use any images you like.  Use at least two human and two dog images.</p>
-<p><strong>Question 6:</strong> Is the output better than you expected :) ?  Or worse :( ?  Provide at least three possible points of improvement for your algorithm.</p>
-
+<h2 id="Step-6:-Test-our-Algorithm">Step 6: Test our Algorithm<a class="anchor-link" href="#Step-6:-Test-our-Algorithm">&#182;</a></h2><h3 id="Test-our-Algorithm-on-Sample-Images!">Test our Algorithm on Sample Images!<a class="anchor-link" href="#Test-our-Algorithm-on-Sample-Images!">&#182;</a></h3>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Answer:</strong> (Three possible points for improvement)</p>
 <ul>
 <li>So I used 3 human images where <ul>
 <li><strong>One had a sideways face</strong></li>
@@ -15920,11 +15753,9 @@ Test Accuracy: 82% (687/836)
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[79]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## TODO: Execute your algorithm from Step 6 on</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## We execute our algorithm from Step 6 on</span>
 <span class="c1">## at least 6 images on your computer.</span>
-<span class="c1">## Feel free to use as many code cells as needed.</span>
 
-<span class="c1">## suggested code, below</span>
 <span class="n">human_files</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;dogImages/human*&quot;</span><span class="p">))</span>
 <span class="n">dog_files</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;dogImages/dog*&quot;</span><span class="p">))</span>
 
