@@ -14430,7 +14430,7 @@ There are 8351 total dog images.
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Before using any of the face detectors, it is standard procedure to convert the images to grayscale.  The <code>detectMultiScale</code> function executes the classifier stored in <code>face_cascade</code> and takes the grayscale image as a parameter.</p>
 <p>In the above code, <code>faces</code> is a numpy array of detected faces, where each row corresponds to a detected face.  Each detected face is a 1D array with four entries that specifies the bounding box of the detected face.  The first two entries in the array (extracted in the above code as <code>x</code> and <code>y</code>) specify the horizontal and vertical positions of the top left corner of the bounding box.  The last two entries in the array (extracted here as <code>w</code> and <code>h</code>) specify the width and height of the box.</p>
-<h3 id="Write-a-Human-Face-Detector">Write a Human Face Detector<a class="anchor-link" href="#Write-a-Human-Face-Detector">&#182;</a></h3><p>We can use this procedure to write a function that returns <code>True</code> if a human face is detected in an image and <code>False</code> otherwise.  This function, aptly named <code>face_detector</code>, takes a string-valued file path to an image as input and appears in the code block below.</p>
+<h3 id="Human-Face-Detector">Human Face Detector<a class="anchor-link" href="#Human-Face-Detector">&#182;</a></h3><p>We can use this procedure to write a function that returns <code>True</code> if a human face is detected in an image and <code>False</code> otherwise.  This function, aptly named <code>face_detector</code>, takes a string-valued file path to an image as input and appears in the code block below.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14452,16 +14452,6 @@ There are 8351 total dog images.
 </div>
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>What we infer from out results:</p>
-<ul>
-<li>I was able to get 96% of human faces detected</li>
-<li>The human face detector detected 18% of the dog faces as Human faces.</li>
-</ul>
-
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
@@ -14531,6 +14521,16 @@ Human faces identified from Dog Images: 18%
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What we infer from out results:</p>
+<ul>
+<li>I was able to get 96% of human faces detected</li>
+<li>The human face detector detected 18% of the dog faces as Human faces.</li>
+</ul>
+
+</div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14811,7 +14811,7 @@ Experiment with many different architectures, and trust your intuition.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 
-<span class="c1"># define the CNN architecture</span>
+<span class="c1"># The CNN architecture</span>
 <span class="k">class</span> <span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="c1">### Our architecture</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
